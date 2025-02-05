@@ -19,7 +19,7 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ['.expo', 'node_modules', '.prettierrc', 'global.d.ts'],
+    ignores: ['.expo', 'node_modules', '.prettierrc', 'global.d.ts', 'eslint.config.mjs'],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
