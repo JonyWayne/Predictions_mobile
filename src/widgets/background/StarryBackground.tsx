@@ -1,11 +1,19 @@
-import { View, StatusBar } from 'react-native';
-import { Image } from 'expo-image';
+import { FC } from 'react';
+import { View, StatusBar, Text, StyleSheet } from 'react-native';
+import { ImageBackground, Image } from 'expo-image';
 
-export const StarryBackground = () => (
+interface StarryBackgroundProps {
+  children?: React.ReactNode;
+}
+
+export const StarryBackground: FC<StarryBackgroundProps> = ({ children }) => (
   <View style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
-    <Image
+    <StatusBar barStyle={'light-content'} />
+    <ImageBackground
       source={require('@/assets/images/background.gif')}
       style={{ width: '100%', height: '100%' }}
-    />
+    >
+      {children}
+    </ImageBackground>
   </View>
 );
