@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from 'react';
+import { useEffect } from 'react';
 import { View, Text, StyleSheet, Animated, Dimensions } from 'react-native';
 import { INFO_TITLE_1, INFO_TITLE_2 } from '@/constants/Common';
 import { fadeInAnimation } from '@/shared/lib';
@@ -10,7 +10,7 @@ export const MotionTitle = () => {
   const animatedTitleOpacity = new Animated.Value(0);
   const animatedSubtitleOpacity = new Animated.Value(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setTimeout(() => {
       fadeInAnimation(animatedTitleOpacity);
       setTimeout(() => {

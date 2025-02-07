@@ -1,13 +1,14 @@
 import { StyleSheet, View } from 'react-native';
 
 import { MotionTitle } from '@/components/MotionTitle';
-import { StarryBackground } from '@/widgets';
+import { StarryBackground, AnimatedButton } from '@/widgets';
 
 export default function HomeScreen() {
   return (
     <StarryBackground>
       <View style={styles.overlay}>
         <MotionTitle />
+        <AnimatedButton onPress={() => console.log('piska')} />
       </View>
     </StarryBackground>
   );
