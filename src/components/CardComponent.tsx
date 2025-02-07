@@ -1,62 +1,85 @@
-import React, { useState, useRef } from 'react';
-import { StyleSheet, View, Dimensions, Image, Animated } from 'react-native';
+import { useState, useRef, useEffect } from 'react';
+import { StyleSheet, View, Dimensions, Image, Animated, ViewStyle } from 'react-native';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 export const CardComponent = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const animatedValue = useRef(new Animated.Value(0)).current;
 
-  const rotateAnimation = () => {
-    Animated.timing(animatedValue, {
-      toValue: isLoading ? 1 : 0,
-      duration: 2000,
-      useNativeDriver: true,
-    }).start();
+  const startRotation = () => {
+    Animated.loop(
+      Animated.timing(animatedValue, {
+        toValue: 1,
+        duration: 2000,
+        useNativeDriver: true,
+      })
+    ).start();
   };
 
-  React.useEffect(() => {
-    rotateAnimation();
+  useEffect(() => {
+    if (isLoading) {
+      startRotation();
+    } else {
+      animatedValue.setValue(0); // Останавливаем анимацию, если isLoading=false
+    }
   }, [isLoading]);
 
   return (
-    <View style={styles.cardContainer}>
-      <Animated.Image
-        source={require('@/assets/images/card_background.jpeg')}
-        style={[
-          styles.cardImage,
-          {
-            transform: [
-              {
-                rotate: animatedValue.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: ['0deg', '360deg'],
-                }),
-              },
-            ],
-          },
-        ]}
-      />
+    <View style={styles.container}>
+      {/* Контейнер для перспективы */}
+      <View style={styles.perspectiveContainer as ViewStyle}>
+        <Animated.View
+          style={[
+            styles.cardContainer,
+            {
+              transform: [
+                { perspective: 1000 }, // Перспектива внутри transform
+                {
+                  rotateY: animatedValue.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: ['0deg', '360deg'],
+                  }),
+                },
+              ],
+            },
+          ]}
+        >
+          <Image
+            source={require('@/assets/images/card_background.jpeg')}
+            style={styles.cardImage}
+          />
+        </Animated.View>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  perspectiveContainer: {
+    // Перспектива для родительского контейнера
+    transform: [{ perspective: 1000 }],
+  },
+  cardContainer: {
+    bottom: SCREEN_HEIGHT * 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 200,
+    height: 300,
+    borderWidth: 2,
+    borderColor: '#34495e',
+    borderRadius: 8,
+    backgroundColor: 'black',
+    overflow: 'hidden',
+  },
   cardImage: {
     width: '100%',
     height: '100%',
     resizeMode: 'cover',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-  },
-  cardContainer: {
-    justifyContent: 'center',
-    width: '50%',
-    height: '40%',
-    borderWidth: 2,
-    borderColor: '#34495e',
-    borderRadius: 8,
-    bottom: SCREEN_HEIGHT * 0.1,
   },
 });
