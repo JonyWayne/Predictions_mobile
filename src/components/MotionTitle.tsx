@@ -15,8 +15,8 @@ export const MotionTitle = () => {
       fadeInAnimation(animatedTitleOpacity);
       setTimeout(() => {
         fadeInAnimation(animatedSubtitleOpacity);
-      }, 1000);
-    }, 2000);
+      }, 500);
+    }, 1000);
   }, []);
 
   return (

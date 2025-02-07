@@ -1,5 +1,4 @@
 import { FC, useEffect } from 'react';
-
 import { Animated, Dimensions, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { StyledButtonProps } from './types';
 import { fadeInAnimation } from '@/shared/lib';
@@ -7,15 +6,18 @@ import { fadeInAnimation } from '@/shared/lib';
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 export const AnimatedButton: FC<StyledButtonProps> = ({ onPress, disabled = false }) => {
+  const animatedOpacity = new Animated.Value(0);
   const animatedScale = new Animated.Value(1);
-  const animatedOpacity = new Animated.Value(1);
-
-  const animatedButton = new Animated.Value(0);
 
   useEffect(() => {
-    setTimeout(() => {
-      fadeInAnimation(animatedButton);
-    }, 3000);
+    fadeInAnimation(animatedOpacity, 3000);
+
+    return () => {
+      Animated.timing(animatedOpacity, {
+        toValue: 0,
+        useNativeDriver: true,
+      }).start();
+    };
   }, []);
 
   const handlePressIn = () => {
@@ -58,7 +60,12 @@ export const AnimatedButton: FC<StyledButtonProps> = ({ onPress, disabled = fals
       onPressOut={handlePressOut}
       onLongPress={handleLongPress}
       disabled={disabled}
-      style={styles.button}
+      style={[
+        styles.button,
+        {
+          opacity: animatedOpacity,
+        },
+      ]}
       onPress={onPress}
     >
       <Animated.View
@@ -105,5 +112,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textTransform: 'uppercase',
+    fontFamily: 'Cinzel_ru',
   },
 });
