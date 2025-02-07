@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     paddingTop: SCREEN_HEIGHT * 0.2,
   },
   titleContainer: {
-    marginBottom: 16,
+    marginBottom: -16,
   },
   subtitleContainer: {},
   title: {

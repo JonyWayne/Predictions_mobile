@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { View, StatusBar, Text, StyleSheet } from 'react-native';
-import { ImageBackground, Image } from 'expo-image';
+import { View, StatusBar } from 'react-native';
+import { ImageBackground } from 'expo-image';
 
 interface StarryBackgroundProps {
   children?: React.ReactNode;
