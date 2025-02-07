@@ -1,9 +1,7 @@
-/* eslint-disable */
+import { StyleSheet, View } from 'react-native';
+
 import { MotionTitle } from '@/components/MotionTitle';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 import { StarryBackground } from '@/widgets';
-import { Text, type TextProps, StyleSheet, View, Image } from 'react-native';
 
 export default function HomeScreen() {
   return (

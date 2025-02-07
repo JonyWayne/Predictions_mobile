@@ -3,9 +3,6 @@ import React from 'react';
 import { View, Text, StyleSheet, Animated, Dimensions } from 'react-native';
 import { INFO_TITLE_1, INFO_TITLE_2 } from '@/constants/Common';
 import { fadeInAnimation } from '@/shared/lib';
-import { ThemedText } from './ThemedText';
-import { ThemedView } from './ThemedView';
-import { FontSource } from 'expo-font';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -53,15 +50,14 @@ const styles = StyleSheet.create({
   subtitleContainer: {},
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
     color: '#fff',
     textAlign: 'center',
-    fontFamily: 'Cinzel',
+    fontFamily: 'Cinzel_ru_bold',
   },
   subtitle: {
     fontSize: 24,
     color: '#ccc',
     textAlign: 'center',
-    fontFamily: 'Cinzel',
+    fontFamily: 'Cinzel_ru',
   },
 });

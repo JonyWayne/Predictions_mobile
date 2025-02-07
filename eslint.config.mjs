@@ -1,3 +1,4 @@
+import { fixupPluginRules } from '@eslint/compat';
 import js from '@eslint/js';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -6,6 +7,7 @@ import reactNativePlugin from 'eslint-plugin-react-native';
 import importPlugin from 'eslint-plugin-import';
 import prettierPlugin from 'eslint-plugin-prettier';
 import eslintReactHooks from 'eslint-plugin-react-hooks';
+import unusedImports from 'eslint-plugin-unused-imports';
 
 export default tseslint.config(
   {
@@ -16,6 +18,7 @@ export default tseslint.config(
       'no-extraneous-dependencies': importPlugin,
       prettier: prettierPlugin,
       'react-hooks': eslintReactHooks,
+      'unused-imports': fixupPluginRules(unusedImports),
     },
   },
   {
@@ -43,9 +46,7 @@ export default tseslint.config(
       quotes: ['error', 'single'],
       semi: ['error', 'always'],
       'max-len': ['off', { code: 120 }],
-      'linebreak-style': ['error', 'unix'],
       'brace-style': ['error', '1tbs'],
-      'comma-dangle': ['error', 'never'],
       'arrow-body-style': 'error',
       'no-console': 'warn',
       'no-debugger': 'warn',
@@ -63,6 +64,15 @@ export default tseslint.config(
       'react/prop-types': 'off',
       'react/no-unknown-property': 'error',
       'react/no-array-index-key': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+        },
+      ],
     },
   }
 );
