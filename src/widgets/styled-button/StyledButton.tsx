@@ -13,20 +13,13 @@ export const AnimatedButton: FC<StyledButtonProps> = ({ onPress, disabled = fals
     fadeInAnimation(animatedOpacity, 3000);
 
     return () => {
-      Animated.timing(animatedOpacity, {
-        toValue: 0,
-        useNativeDriver: true,
-      }).start();
+      fadeInAnimation(animatedOpacity, 3000);
     };
   }, []);
 
   const handlePressIn = () => {
     Animated.spring(animatedScale, {
       toValue: 0.95,
-      useNativeDriver: true,
-    }).start();
-    Animated.timing(animatedOpacity, {
-      toValue: 0.8,
       useNativeDriver: true,
     }).start();
   };
@@ -36,18 +29,10 @@ export const AnimatedButton: FC<StyledButtonProps> = ({ onPress, disabled = fals
       toValue: 1,
       useNativeDriver: true,
     }).start();
-    Animated.timing(animatedOpacity, {
-      toValue: 1,
-      useNativeDriver: true,
-    }).start();
   };
 
   const handleLongPress = () => {
     Animated.spring(animatedScale, {
-      toValue: 1,
-      useNativeDriver: true,
-    }).start();
-    Animated.timing(animatedOpacity, {
       toValue: 1,
       useNativeDriver: true,
     }).start();
@@ -110,8 +95,7 @@ const styles = StyleSheet.create({
   text: {
     color: 'rgba(255, 255, 255, 0.8)',
     fontSize: 18,
-    fontWeight: 'bold',
     textTransform: 'uppercase',
-    fontFamily: 'Cinzel_ru',
+    fontFamily: 'Cinzel_ru_bold',
   },
 });
