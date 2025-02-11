@@ -21,7 +21,7 @@ export const CardComponent = () => {
     if (isLoading) {
       startRotation();
     } else {
-      animatedValue.setValue(0); // Останавливаем анимацию, если isLoading=false
+      animatedValue.setValue(0);
     }
   }, [isLoading]);
 

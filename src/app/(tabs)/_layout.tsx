@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { Tabs } from 'expo-router';
 import { Platform } from 'react-native';
 
