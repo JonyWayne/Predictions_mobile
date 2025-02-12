@@ -10,21 +10,6 @@ export default function HomeScreen() {
   const isShownResult = data && !isError && !isLoading;
 
   return (
-    // <StarryBackground>
-    //   <View style={[styles.overlay, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
-    //     <View style={styles.titleContainer}>{!isShownResult && <MotionTitle />}</View>
-
-    //     <View style={styles.contentContainer}>
-    //       {!data && !isError && <CardComponent />}
-    //       {isShownResult && <ReadingResult cards={data?.cards} prediction={data?.prediction} />}
-    //     </View>
-
-    //     <View style={styles.buttonContainer}>
-    //       {!data && !isLoading && <AnimatedButton onPress={() => fetchData('/cards')} />}
-    //     </View>
-    //   </View>
-    // </StarryBackground>
-
     <View style={styles.container}>
       {/* Фоновое изображение */}
       <StarryBackground />

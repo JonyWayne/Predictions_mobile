@@ -23,7 +23,7 @@ export const ReadingResult: FC<TarotReading> = ({ cards, prediction }) => {
           <TypeWriter
             typing={1}
             style={styles.text}
-            delay={2}
+            delay={5}
             selectable={true}
             minDelay={1}
             maxDelay={1}
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingTop: SCREEN_HEIGHT * 0.01,
+    paddingTop: SCREEN_HEIGHT * 0.05,
   },
   cardsContainer: {
     flexDirection: 'row',
