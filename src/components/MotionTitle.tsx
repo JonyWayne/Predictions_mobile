@@ -1,10 +1,11 @@
-/* eslint-disable */
 import { useEffect } from 'react';
 import { View, Text, StyleSheet, Animated, Dimensions } from 'react-native';
+
 import { INFO_TITLE_1, INFO_TITLE_2 } from '@/constants/Common';
 import { fadeInAnimation } from '@/shared/lib';
 
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+const isLargeScreen = SCREEN_HEIGHT > 700;
 
 export const MotionTitle = () => {
   const animatedTitleOpacity = new Animated.Value(0);
@@ -20,17 +21,12 @@ export const MotionTitle = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Animated.View
-        style={[
-          styles.titleContainer,
-          { opacity: animatedTitleOpacity, transform: [{ translateY: -50 }] },
-        ]}
-      >
+    <View>
+      <Animated.View style={[{ opacity: animatedTitleOpacity }]}>
         <Text style={styles.title}>{INFO_TITLE_1}</Text>
       </Animated.View>
 
-      <Animated.View style={[styles.subtitleContainer, { opacity: animatedSubtitleOpacity }]}>
+      <Animated.View style={[{ opacity: animatedSubtitleOpacity }]}>
         <Text style={styles.subtitle}>{INFO_TITLE_2}</Text>
       </Animated.View>
     </View>
@@ -38,25 +34,17 @@ export const MotionTitle = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    paddingTop: SCREEN_HEIGHT * 0.2,
-  },
-  titleContainer: {
-    marginBottom: -16,
-  },
-  subtitleContainer: {},
   title: {
-    fontSize: 28,
+    fontSize: SCREEN_WIDTH * 0.08,
     color: '#fff',
     textAlign: 'center',
+    marginTop: isLargeScreen ? SCREEN_HEIGHT * 0.17 : SCREEN_HEIGHT * 0.06,
     fontFamily: 'Cinzel_ru_bold',
+    marginBottom: isLargeScreen ? SCREEN_HEIGHT * 0.03 : SCREEN_HEIGHT * 0.01,
   },
   subtitle: {
-    fontSize: 24,
-    color: '#ccc',
+    fontSize: SCREEN_WIDTH * 0.05,
+    color: '#fff',
     textAlign: 'center',
     fontFamily: 'Cinzel_ru',
   },

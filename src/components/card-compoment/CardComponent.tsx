@@ -1,10 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
-import { StyleSheet, View, Dimensions, Image, Animated, ViewStyle } from 'react-native';
+import { useRef, useEffect, FC } from 'react';
+import { StyleSheet, View, Image, Animated, ViewStyle } from 'react-native';
+import { CardComponentProps } from './types';
 
-const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window');
-
-export const CardComponent = () => {
-  const [isLoading, setIsLoading] = useState(true);
+export const CardComponent: FC<CardComponentProps> = ({ isLoading }) => {
   const animatedValue = useRef(new Animated.Value(0)).current;
 
   const startRotation = () => {
@@ -26,7 +24,7 @@ export const CardComponent = () => {
   }, [isLoading]);
 
   return (
-    <View style={styles.container}>
+    <View>
       {/* Контейнер для перспективы */}
       <View style={styles.perspectiveContainer as ViewStyle}>
         <Animated.View
@@ -56,21 +54,19 @@ export const CardComponent = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  perspectiveContainer: {
+    // Перспектива для родительского контейнера (эффект объема, визуальные эффект)
+    transform: [{ perspective: 1000 }],
     justifyContent: 'center',
     alignItems: 'center',
   },
-  perspectiveContainer: {
-    // Перспектива для родительского контейнера
-    transform: [{ perspective: 1000 }],
+  cardImage: {
+    width: '100%',
+    height: '100%',
   },
   cardContainer: {
-    bottom: SCREEN_HEIGHT * 0.1,
     justifyContent: 'center',
     alignItems: 'center',
-    // width: SCREEN_WIDTH * 0.35,
-    // height: SCREEN_WIDTH * 0.6,
     width: 200,
     height: 300,
     borderWidth: 2,
@@ -78,10 +74,5 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: 'black',
     overflow: 'hidden',
-  },
-  cardImage: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
   },
 });

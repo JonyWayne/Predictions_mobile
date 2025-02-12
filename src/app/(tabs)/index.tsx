@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 
-import { ReadingResult, CardComponent, MotionTitle } from '@/components';
-import { StarryBackground, AnimatedButton } from '@/widgets';
+import { CardComponent, MotionTitle, ReadingResult } from '@/components';
+import { AnimatedButton, StarryBackground } from '@/widgets';
 import { useFetchFunc } from '@/hooks';
 import { TarotReading } from '@/shared/types';
 
@@ -10,33 +10,68 @@ export default function HomeScreen() {
   const isShownResult = data && !isError && !isLoading;
 
   return (
-    <StarryBackground>
-      <View style={styles.overlay}>
+    // <StarryBackground>
+    //   <View style={[styles.overlay, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
+    //     <View style={styles.titleContainer}>{!isShownResult && <MotionTitle />}</View>
+
+    //     <View style={styles.contentContainer}>
+    //       {!data && !isError && <CardComponent />}
+    //       {isShownResult && <ReadingResult cards={data?.cards} prediction={data?.prediction} />}
+    //     </View>
+
+    //     <View style={styles.buttonContainer}>
+    //       {!data && !isLoading && <AnimatedButton onPress={() => fetchData('/cards')} />}
+    //     </View>
+    //   </View>
+    // </StarryBackground>
+
+    <View style={styles.container}>
+      {/* Фоновое изображение */}
+      <StarryBackground />
+      {/* Контент */}
+      <View style={styles.content}>
         {!isShownResult && <MotionTitle />}
-        {!data && !isError && <CardComponent />}
+        {!data && !isError && <CardComponent isLoading={isLoading} />}
         {isShownResult && <ReadingResult cards={data?.cards} prediction={data?.prediction} />}
         {!data && !isLoading && <AnimatedButton onPress={() => fetchData('/cards')} />}
       </View>
-    </StarryBackground>
+    </View>
   );
 }
 
+// const styles = StyleSheet.create({
+//   overlay: {
+//     flex: 1,
+//     justifyContent: 'space-between',
+//   },
+//   titleContainer: {
+//     height: SCREEN_HEIGHT * 0.2,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   contentContainer: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     paddingHorizontal: 20,
+//   },
+//   buttonContainer: {
+//     height: SCREEN_HEIGHT * 0.15,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     paddingBottom: 20,
+//   },
+// });
 const styles = StyleSheet.create({
-  overlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+  container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  cardImage: {
+  content: {
+    flex: 1,
     width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-    position: 'absolute',
-    top: 0,
-    left: 0,
+    justifyContent: 'space-between', // Распределяем пространство между элементами
+    paddingHorizontal: 20, // Отступы по бокам
   },
 });
