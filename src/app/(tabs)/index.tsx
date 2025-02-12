@@ -1,29 +1,21 @@
-/* eslint-disable */
 import { StyleSheet, View } from 'react-native';
 
-import { MotionTitle } from '@/components/MotionTitle';
+import { ReadingResult, CardComponent, MotionTitle } from '@/components';
 import { StarryBackground, AnimatedButton } from '@/widgets';
-import { CardComponent } from '@/components/CardComponent';
 import { useFetchFunc } from '@/hooks';
-import { ReadingResult } from '@/components/ReadingResult';
 import { TarotReading } from '@/shared/types';
 
 export default function HomeScreen() {
   const { data, fetchData, isError, isLoading } = useFetchFunc<TarotReading>();
   const isShownResult = data && !isError && !isLoading;
-  console.log(data);
-  console.log(isError, 'isError');
-  console.log(isLoading, 'isLoading');
 
   return (
     <StarryBackground>
       <View style={styles.overlay}>
-        {/* {!isShownResult && <MotionTitle />} */}
-        {/* <TarotDeck /> */}
-        {/* {!data && !isError && <CardComponent />} */}
-        {/* {isShownResult && <ReadingResult cards={data?.cards} prediction={data?.prediction} />} */}
-        {<ReadingResult cards={[]} prediction={''} />}
-        {/* {!isShownResult && <AnimatedButton onPress={() => fetchData('/cards')} />} */}
+        {!isShownResult && <MotionTitle />}
+        {!data && !isError && <CardComponent />}
+        {isShownResult && <ReadingResult cards={data?.cards} prediction={data?.prediction} />}
+        {!data && !isLoading && <AnimatedButton onPress={() => fetchData('/cards')} />}
       </View>
     </StarryBackground>
   );

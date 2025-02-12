@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { StyleSheet, View, Dimensions, Image, Animated, ViewStyle } from 'react-native';
 
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
+const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window');
 
 export const CardComponent = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -69,6 +69,8 @@ const styles = StyleSheet.create({
     bottom: SCREEN_HEIGHT * 0.1,
     justifyContent: 'center',
     alignItems: 'center',
+    // width: SCREEN_WIDTH * 0.35,
+    // height: SCREEN_WIDTH * 0.6,
     width: 200,
     height: 300,
     borderWidth: 2,

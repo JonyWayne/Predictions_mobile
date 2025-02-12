@@ -1,4 +1,4 @@
-import { StyleSheet, Image, Platform } from 'react-native';
+import { StyleSheet, Image, Platform, View, TouchableOpacity, Text } from 'react-native';
 
 import { Collapsible } from '@/components/Collapsible';
 import { ExternalLink } from '@/components/ExternalLink';
@@ -6,6 +6,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
+import { openDonationPage } from '@/shared/lib';
 
 export default function TabTwoScreen() {
   return (
@@ -24,6 +25,11 @@ export default function TabTwoScreen() {
         <ThemedText type="title">Explore</ThemedText>
       </ThemedView>
       <ThemedText>This app includes example code to help you get started.</ThemedText>
+      <View>
+        <TouchableOpacity style={styles.button} onPress={openDonationPage}>
+          <Text style={styles.buttonText}>Сделать перевод</Text>
+        </TouchableOpacity>
+      </View>
       <Collapsible title="File-based routing">
         <ThemedText>
           This app has two screens:{' '}
@@ -104,5 +110,16 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     gap: 8,
+  },
+  button: {
+    backgroundColor: '#FFA500', // Желтый цвет кнопки
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
 });

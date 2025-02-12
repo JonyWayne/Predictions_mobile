@@ -1,36 +1,26 @@
-import { useState, useEffect, useRef, FC } from 'react';
-import { StyleSheet, View, Image, Animated, Dimensions, Text } from 'react-native';
+import { FC } from 'react';
+import { StyleSheet, View, Image, Animated, Dimensions } from 'react-native';
 import TypeWriter from 'react-native-typewriter';
 
 import { TarotReading } from '@/shared/types';
-import { TEST_TEXT, TEST_CARDS } from '@/app/(tabs)/const';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 export const ReadingResult: FC<TarotReading> = ({ cards, prediction }) => {
-  // console.log(TEST_TEXT);
-
   const getImageUri = (base64Data: string) => `data:image/jpeg;base64,${base64Data}`;
 
   return (
     <View style={styles.container}>
-      {/* Контейнер для карт */}
       <View style={styles.cardsContainer}>
-        {TEST_CARDS.map((card) => (
+        {cards.map((card) => (
           <View key={card.id} style={styles.cardContainer}>
             <Image source={{ uri: getImageUri(card.imageData) }} style={styles.cardImage} />
           </View>
         ))}
       </View>
-      {/* <Animated.Text style={[styles.predictionText, { opacity: animatedOpacity }]}>
-        {displayedText}
-      </Animated.Text> */}
       <Animated.Text style={styles.textContainer}>
         <Animated.ScrollView>
-          <Text style={styles.text} selectable={true}>
-            {TEST_TEXT}
-          </Text>
-          {/* <TypeWriter
+          <TypeWriter
             typing={1}
             style={styles.text}
             delay={2}
@@ -39,8 +29,8 @@ export const ReadingResult: FC<TarotReading> = ({ cards, prediction }) => {
             maxDelay={1}
             fixed
           >
-            {TEST_TEXT}
-          </TypeWriter> */}
+            {prediction}
+          </TypeWriter>
         </Animated.ScrollView>
       </Animated.Text>
     </View>
