@@ -1,8 +1,10 @@
 /* eslint-disable */
 import axios from 'axios';
 
+const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+
 export const apiService = axios.create({
-  baseURL: 'https://predictions-production-7519.up.railway.app',
+  baseURL: apiUrl,
 });
 
 apiService.interceptors.request.use(
@@ -15,7 +17,6 @@ apiService.interceptors.request.use(
 apiService.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.error('Ошибка при получении данных:', error);
     return Promise.reject(error);
   }
 );

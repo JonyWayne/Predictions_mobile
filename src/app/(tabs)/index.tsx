@@ -1,52 +1,48 @@
 import { StyleSheet, View } from 'react-native';
 
-import { CardComponent, MotionTitle, ReadingResult } from '@/components';
+import { CardComponent, MotionTitle, ReadingResult, Spinner, ErrorMessage } from '@/components';
 import { AnimatedButton, StarryBackground } from '@/widgets';
-import { useFetchFunc } from '@/hooks';
+import { useFetchFunc, useStorageDataManager } from '@/hooks';
 import { TarotReading } from '@/shared/types';
+
+import { EURL } from '@/constants/Common';
+
+const { PREDICTION_DATA } = EURL;
 
 export default function HomeScreen() {
   const { data, fetchData, isError, isLoading } = useFetchFunc<TarotReading>();
-  const isShownResult = data && !isError && !isLoading;
+  const { receivedPrediction, isStorageLoading } = useStorageDataManager(data);
+  const isReadingReault = receivedPrediction && !isLoading && !isError;
+  const isInitialState = !receivedPrediction && !isError && !isLoading;
+  const isErrorState = isError && !isLoading;
+  const isLoadingState = !receivedPrediction && !isError;
 
-  return (
-    <View style={styles.container}>
-      {/* Фоновое изображение */}
-      <StarryBackground />
-      {/* Контент */}
-      <View style={styles.content}>
-        {!isShownResult && <MotionTitle />}
-        {!data && !isError && <CardComponent isLoading={isLoading} />}
-        {isShownResult && <ReadingResult cards={data?.cards} prediction={data?.prediction} />}
-        {!data && !isLoading && <AnimatedButton onPress={() => fetchData('/cards')} />}
+  // Отображение спиннера, если данные загружаются
+  if (isStorageLoading) {
+    <Spinner />;
+  } else {
+    return (
+      <View style={styles.container}>
+        {/* Фоновое изображение */}
+        <StarryBackground />
+        {/* Контент */}
+        <View style={isLoading || isReadingReault ? '' : styles.content}>
+          {isInitialState && <MotionTitle />}
+          {isLoadingState && <CardComponent isLoading={isLoading} />}
+          {isErrorState && <ErrorMessage />}
+          {isReadingReault && (
+            <ReadingResult
+              cards={receivedPrediction?.cards}
+              prediction={receivedPrediction?.prediction}
+            />
+          )}
+          {isInitialState && <AnimatedButton onPress={() => fetchData(PREDICTION_DATA)} />}
+        </View>
       </View>
-    </View>
-  );
+    );
+  }
 }
 
-// const styles = StyleSheet.create({
-//   overlay: {
-//     flex: 1,
-//     justifyContent: 'space-between',
-//   },
-//   titleContainer: {
-//     height: SCREEN_HEIGHT * 0.2,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-//   contentContainer: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     paddingHorizontal: 20,
-//   },
-//   buttonContainer: {
-//     height: SCREEN_HEIGHT * 0.15,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     paddingBottom: 20,
-//   },
-// });
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -56,7 +52,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     width: '100%',
-    justifyContent: 'space-between', // Распределяем пространство между элементами
-    paddingHorizontal: 20, // Отступы по бокам
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
   },
 });

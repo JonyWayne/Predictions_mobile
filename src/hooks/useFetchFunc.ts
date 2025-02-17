@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { getData } from '@/shared/api';
 import { useState } from 'react';
 
@@ -12,8 +11,7 @@ export const useFetchFunc = <T>() => {
       setIsLoading(true);
       const result = await getData(endpoint);
       setData(result);
-    } catch (error) {
-      console.log('Ошибка при загрузке данных:', error);
+    } catch (e) {
       setIsError(true);
     } finally {
       setIsLoading(false);

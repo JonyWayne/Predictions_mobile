@@ -48,7 +48,7 @@ export default tseslint.config(
       'max-len': ['off', { code: 120 }],
       'brace-style': ['error', '1tbs'],
       'arrow-body-style': 'error',
-      'no-console': 'warn',
+      'no-console': ['warn', { allow: ['error'] }],
       'no-debugger': 'warn',
       'no-empty': 'error',
       'no-extra-semi': 'error',
