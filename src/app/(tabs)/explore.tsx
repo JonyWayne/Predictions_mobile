@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     gap: 8,
-    fontFamily: 'Cinzel_ru_bold',
+    fontFamily: 'Cinzel_ru',
   },
   button: {
     backgroundColor: '#FFA500',
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontWeight: 'bold',
-    fontFamily: 'Cinzel_ru_bold',
+    fontFamily: 'Cinzel_ru',
   },
   image: {
     flex: 1,
@@ -73,6 +73,6 @@ const styles = StyleSheet.create({
     top: SCREEN_HEIGHT * 0.04,
   },
   textStyle: {
-    fontFamily: 'Cinzel_ru_bold',
+    fontFamily: 'Cinzel_ru',
   },
 });
