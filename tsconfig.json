@@ -9,5 +9,6 @@
     },
     "jsx": "react-jsx"
   },
-  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts", "eslint.config.mjs"]
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts", "eslint.config.mjs"],
+  "exclude": ["node_modules", "./node_modules"]
 }
