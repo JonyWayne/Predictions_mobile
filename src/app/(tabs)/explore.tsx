@@ -21,15 +21,15 @@ export default function TabTwoScreen() {
       headerImage={<Image source={require('@/assets/images/dev.jpeg')} style={styles.image} />}
     >
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">{MAIN_INFO}</ThemedText>
+        <Text style={styles.textStyleBold}>{MAIN_INFO}</Text>
       </ThemedView>
-      <ThemedText style={styles.textStyle}>{DESCRIPTION}</ThemedText>
+      <ThemedText style={styles.textStyleDefault}>{DESCRIPTION}</ThemedText>
 
       <Collapsible title={ABOUT}>
-        <ThemedText style={styles.textStyle}>{ABOUT_INFO}</ThemedText>
+        <ThemedText style={styles.textStyleDefault}>{ABOUT_INFO}</ThemedText>
       </Collapsible>
       <Collapsible title={DONATE}>
-        <ThemedText style={styles.textStyle}>{DONATE_INFO}</ThemedText>
+        <ThemedText style={styles.textStyleDefault}>{DONATE_INFO}</ThemedText>
         <View>
           <TouchableOpacity style={styles.button} onPress={openDonationPage}>
             <Text style={styles.buttonText}>{DONATE}</Text>
@@ -72,7 +72,11 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     top: SCREEN_HEIGHT * 0.04,
   },
-  textStyle: {
+  textStyleDefault: {
     fontFamily: 'Cinzel_ru',
+  },
+  textStyleBold: {
+    fontFamily: 'Cinzel_ru_bold',
+    fontSize: 24,
   },
 });

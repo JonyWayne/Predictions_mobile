@@ -7,6 +7,9 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { EText } from '@/constants/Common';
+
+const { TRIPLET, MAIN_INFO } = EText;
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -14,6 +17,9 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
+        tabBarLabelStyle: {
+          fontFamily: 'Cinzel_ru_bold',
+        },
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
         tabBarButton: HapticTab,
@@ -30,7 +36,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Триплет',
+          title: TRIPLET,
           tabBarIcon: ({ color }) => (
             <IconSymbol size={28} name={'cards.outline' as SFSymbol} color={color} />
           ),
@@ -39,8 +45,10 @@ export default function TabLayout() {
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Информация',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="info" color={color} />,
+          title: MAIN_INFO,
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name={'information.outline' as SFSymbol} color={color} />
+          ),
         }}
       />
     </Tabs>

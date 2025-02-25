@@ -6,6 +6,8 @@ import { OpaqueColorValue, StyleProp, TextStyle, ViewStyle } from 'react-native'
 const MAPPING_COMMUNITY = {
   'cards.outline': 'cards-outline',
   'heart.fill': 'heart',
+  'chevron.right': 'chevron-right',
+  'information.outline': 'information-outline',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],
