@@ -1,5 +1,6 @@
-import { getData } from '@/shared/api';
 import { useState } from 'react';
+
+import { getData } from '@/shared/api';
 
 export const useFetchFunc = <T>() => {
   const [data, setData] = useState<T | null>(null);
@@ -9,7 +10,7 @@ export const useFetchFunc = <T>() => {
   const fetchData = async (endpoint: string) => {
     try {
       setIsLoading(true);
-      const result = await getData(endpoint);
+      const result = await getData<T>(endpoint);
       setData(result);
     } catch (e) {
       setIsError(true);

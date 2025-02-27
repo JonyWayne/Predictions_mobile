@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { Animated } from 'react-native';
 
 export const fadeInAnimation = (value: Animated.Value, duration: number = 1500) => {

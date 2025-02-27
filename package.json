@@ -59,7 +59,7 @@
     "@types/react-native": "^0.73.0",
     "@types/react-test-renderer": "18.3.0",
     "@typescript-eslint/parser": "^8.23.0",
-    "eslint": "9.7.0",
+    "eslint": "9.10.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-jsdoc": "50.3.1",

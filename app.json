@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/ic_launcher.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "jackstar.predictions"
     },
     "web": {
       "bundler": "metro",
